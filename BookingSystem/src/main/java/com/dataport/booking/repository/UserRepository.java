@@ -10,4 +10,5 @@ public class UserRepository {
 	
 	@Autowired
 	EntityManager entityManager;
+	
 }
