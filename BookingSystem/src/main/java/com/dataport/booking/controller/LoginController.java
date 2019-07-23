@@ -21,7 +21,7 @@ public class LoginController {
 
 	@PostMapping("/doLogin")
 	public String doLogin() {
-		System.out.println("测试何宇豪");
+		System.out.println("测试zjw");
 		return "success";
 	}
 
