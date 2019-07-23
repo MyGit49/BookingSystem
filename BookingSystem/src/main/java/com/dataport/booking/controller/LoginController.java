@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
 	@PostMapping("/doLogin")
-	public String doLogin() {
+	public String doLogin(@PathVariable String username,@PathVariable String password) {
 		System.out.println("测试zjw");
-		return "success";
+		return username+password;
 	}
 
 }
