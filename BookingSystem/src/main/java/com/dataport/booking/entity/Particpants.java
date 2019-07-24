@@ -10,38 +10,40 @@ import javax.persistence.Table;
 public class Particpants {
 	
 	@Id
-	@Column(name="inforation_id")
-	private int inforationId;
+	@Column(name="information_id")
+	private int informationId;
 	
 	@Column(name = "meeting_id")
 	private int meetingId;
 	
-	@Column(name = "user_id")
-	private int userId;
+	@Column(name = "user_email")
+	private String userEmail;
 
-	public int getInforation_id() {
-		return inforationId;
+	public int getInformationId() {
+		return informationId;
 	}
 
-	public void setInforation_id(int inforation_id) {
-		this.inforationId = inforation_id;
+	public void setInformationId(int informationId) {
+		this.informationId = informationId;
 	}
 
-	public int getMeeting_id() {
+	public int getMeetingId() {
 		return meetingId;
 	}
 
-	public void setMeeting_id(int meeting_id) {
-		this.meetingId = meeting_id;
+	public void setMeetingId(int meetingId) {
+		this.meetingId = meetingId;
 	}
 
-	public int getUser_id() {
-		return userId;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUser_id(int user_id) {
-		this.userId = user_id;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-	
+
+
+
 	
 }

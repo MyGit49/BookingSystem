@@ -26,10 +26,13 @@ public class Meeting {
 	private String content;
 	
 	@Column(name = "start_time")
-	private Date startTime;
+	private int startTime;
 	
 	@Column(name = "end_time")
-	private Date endTime;
+	private int endTime;
+	
+	@Column(name = "date")
+	private String date;
 	
 	public int getMeetingId() {
 		return meetingId;
@@ -63,34 +66,28 @@ public class Meeting {
 		this.content = content;
 	}
 
-	public Date getStartTime() {
+	public int getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(int startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public int getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(int endTime) {
 		this.endTime = endTime;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	@Column(name = "date")
-	private Date date;
-
-	
-	
-	
 }
