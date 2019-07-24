@@ -43,23 +43,32 @@ public class LoginController {
 	@Autowired
 	private HttpSession httpSession;
 	@PostMapping("/doLogin")
-	public String doLogin(@RequestParam String userAccount,@RequestParam String password) {
+	public Map<String,Integer> doLogin(@RequestParam String userAccount,@RequestParam String password) {
 		//System.out.println("测试zjw");
 		User user = userService.findByAccount(userAccount);
+		Map<String,Integer> map=new HashMap<String,Integer>();
 		if (user!=null) {
 			if (user.getPassword().equals(password)) {
 				if(user.getState()==0) {
 					httpSession.setAttribute("user", user);
-					return "0";
+					map.put("userid", user.getId());
+					map.put("status",0);
+					return map;
 				}else {
 					httpSession.setAttribute("user", user);
-					return "1";
+					map.put("userid", user.getId());
+					map.put("status",1);
+					return map;
 					}
 			}else {
-				return "2";
+				map.put("status", 2);
+				map.put("userid", null);
+				return map;
 			}
 		}
-		return "2";
+		map.put("status", 2);
+		map.put("userid", null);
+		return map;
 	}
 
 }
