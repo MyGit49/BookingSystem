@@ -61,23 +61,23 @@ public class MeetingService {
 	 *  
 	 *  2  按月份输出Meeting记录
 	 */
-	public List<Meeting> meetingByMonth(String roomId,String year,String month){
+	public List<Meeting> meetingByMonth(String roomId,String date){
 		int roomId1=Integer.parseInt(roomId);
 		List<Meeting> list = meetingRepositoryIF.findByRoomId(roomId1);
 		for(int i=list.size()-1;i>=0;i--) {
 			String str = list.get(i).getDate();
-			if(!(year.equals(str.substring(0, 4))&&month.equals(str.substring(5, 7)))) {
+			if(!(date.substring(0,4).equals(str.substring(0, 4))&&date.substring(5, 7).equals(str.substring(5, 7)))) {
 				list.remove(list.get(i));
 			}
 		}
 		return list;
 	}
 	
-	public List<Meeting> meetingByDay(String year,String month,String day){
+	public List<Meeting> meetingByDay(String date){
 		List<Meeting> list = meetingRepositoryIF.findAll();
 		for(int i=list.size()-1;i>=0;i--) {
 			String str = list.get(i).getDate();
-			if(!(year.equals(str.substring(0, 4))&&month.equals(str.substring(5, 7))&&day.equals(str.substring(8, 10)))) {
+			if(!(date.equals(str))) {
 				list.remove(list.get(i));
 			}
 		}

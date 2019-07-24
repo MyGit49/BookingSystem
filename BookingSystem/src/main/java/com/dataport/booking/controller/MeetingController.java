@@ -57,8 +57,8 @@ public class MeetingController {
 	 */
 	@PostMapping("/meetingByMonth")
 	public List<Meeting> meetingByMonth(@RequestParam String roomId,
-			@RequestParam String year,@RequestParam String month){
-		return meetingService.meetingByMonth(roomId,year,month);
+			@RequestParam String date){
+		return meetingService.meetingByMonth(roomId,date);
 	}
 	
 	/**
@@ -68,9 +68,8 @@ public class MeetingController {
 	 *入参：年、月、天    按需要将参数转为int类型
 	 */
 	@PostMapping("/meetingByDay")
-	public List<Meeting> meetingByDay(@RequestParam String year,
-			@RequestParam String month,@RequestParam String day){
-		return meetingService.meetingByDay(year,month,day);
+	public List<Meeting> meetingByDay(@RequestParam String date){
+		return meetingService.meetingByDay(date);
 	}
 	
 	/**
