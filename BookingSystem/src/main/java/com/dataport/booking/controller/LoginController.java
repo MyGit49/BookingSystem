@@ -3,6 +3,7 @@ package com.dataport.booking.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,8 @@ public class LoginController {
 	
 	@Autowired
 	UserService userService;
-	
+	@Autowired
+	private HttpSession httpSession;
 	@PostMapping("/doLogin")
 	public String doLogin(@RequestParam String userAccount,@RequestParam String password) {
 		//System.out.println("测试zjw");
@@ -47,9 +49,12 @@ public class LoginController {
 		if (user!=null) {
 			if (user.getPassword().equals(password)) {
 				if(user.getState()==0) {
+					httpSession.setAttribute("user", user);
 					return "0";
-				}else
+				}else {
+					httpSession.setAttribute("user", user);
 					return "1";
+					}
 			}else {
 				return "2";
 			}
