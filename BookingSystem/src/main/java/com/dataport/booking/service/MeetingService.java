@@ -52,4 +52,41 @@ public class MeetingService {
 		    meeting.getRoomId(),meeting.getContent(),meeting.getStartTime(),meeting.getEndTime(),
 		    meeting.getDate());
 		 }
+	
+	
+	/**
+	 * @author heyh
+	 *  
+	 *  1  记录：对list中元素进行遍历的时候使用倒序遍历（正序遍历使用remove始终会留有一个元素）
+	 *  
+	 *  2  按月份输出Meeting记录
+	 */
+	public List<Meeting> meetingByMonth(String roomId,String year,String month){
+		int roomId1=Integer.parseInt(roomId);
+		List<Meeting> list = meetingRepositoryIF.findByRoomId(roomId1);
+		for(int i=list.size()-1;i>=0;i--) {
+			String str = list.get(i).getDate();
+			if(!(year.equals(str.substring(0, 4))&&month.equals(str.substring(5, 7)))) {
+				list.remove(list.get(i));
+			}
+		}
+		return list;
+	}
+	
+	public List<Meeting> meetingByDay(String year,String month,String day){
+		List<Meeting> list = meetingRepositoryIF.findAll();
+		for(int i=list.size()-1;i>=0;i--) {
+			String str = list.get(i).getDate();
+			if(!(year.equals(str.substring(0, 4))&&month.equals(str.substring(5, 7))&&day.equals(str.substring(8, 10)))) {
+				list.remove(list.get(i));
+			}
+		}
+		
+		
+		return list;
+	}
+	
+	
+	
+	
 }

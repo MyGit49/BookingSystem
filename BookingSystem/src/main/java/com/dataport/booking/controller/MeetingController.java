@@ -57,10 +57,8 @@ public class MeetingController {
 	 */
 	@PostMapping("/meetingByMonth")
 	public List<Meeting> meetingByMonth(@RequestParam String roomId,
-			@RequestParam String month){
-		//需要实现的业务逻辑
-		List<Meeting> list = new ArrayList<>();
-		return list;
+			@RequestParam String year,@RequestParam String month){
+		return meetingService.meetingByMonth(roomId,year,month);
 	}
 	
 	/**
@@ -72,9 +70,7 @@ public class MeetingController {
 	@PostMapping("/meetingByDay")
 	public List<Meeting> meetingByDay(@RequestParam String year,
 			@RequestParam String month,@RequestParam String day){
-		//需要实现的业务逻辑
-		List<Meeting> list = new ArrayList<>();
-		return list;
+		return meetingService.meetingByDay(year,month,day);
 	}
 	
 	/**
