@@ -17,8 +17,8 @@ public class RoomController {
 
 	@Autowired
 	RoomService roomService;
-	
-	
+
+
 	@GetMapping("/allRoom")
 	public List<Room> showRoom() {
 		return roomService.findAll();

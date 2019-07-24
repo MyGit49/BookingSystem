@@ -16,7 +16,7 @@ public class Particpants {
 	@Column(name = "meeting_id")
 	private int meetingId;
 	
-	@Column(name = "user_email")
+	@Column(name = "user_mail_address")
 	private String userEmail;
 
 	public int getInformationId() {
