@@ -12,13 +12,14 @@ import com.dataport.booking.entity.Room;
 import com.dataport.booking.service.RoomService;
 
 @RestController
-@RequestMapping("/V1")
+@RequestMapping("/room")
 public class RoomController {
 
 	@Autowired
 	RoomService roomService;
 	
-	@GetMapping("/showRoom")
+	
+	@GetMapping("/allRoom")
 	public List<Room> showRoom() {
 		return roomService.findAll();
 	}
