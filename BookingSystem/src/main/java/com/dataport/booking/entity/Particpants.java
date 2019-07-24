@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class Particpants {
 	
 	@Id
+	@Column(name="inforation_id")
 	private int inforationId;
 	
 	@Column(name = "meeting_id")

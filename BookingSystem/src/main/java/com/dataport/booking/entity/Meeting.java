@@ -1,5 +1,8 @@
 package com.dataport.booking.entity;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +13,7 @@ import javax.persistence.Table;
 public class Meeting {
 	
 	@Id
+	@Column(name = "meeting_id")
 	private int meetingId;
 	
 	@Column(name = "user_id")
@@ -18,18 +22,15 @@ public class Meeting {
 	@Column(name = "room_id")
 	private int roomId;
 	
-	@Column(name = "meet_content")
+	@Column(name = "meeting_content")
 	private String content;
 	
 	@Column(name = "start_time")
-	private String startTime;
+	private Date startTime;
 	
 	@Column(name = "end_time")
-	private String endTime;
+	private Date endTime;
 	
-	@Column(name = "date")
-	private String date;
-
 	public int getMeetingId() {
 		return meetingId;
 	}
@@ -62,29 +63,34 @@ public class Meeting {
 		this.content = content;
 	}
 
-	public String getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	@Column(name = "date")
+	private Date date;
+
+	
 	
 	
 }

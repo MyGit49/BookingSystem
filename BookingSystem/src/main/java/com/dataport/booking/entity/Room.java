@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class Room {
 	
 	@Id
+	@Column(name = "room_id")
 	private int room_id;
 	
 	@Column(name = "room_name")

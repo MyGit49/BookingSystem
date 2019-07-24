@@ -19,7 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dataport.booking.entity.User;
 import com.dataport.booking.service.UserService;
-
+/**
+ * 
+ * <p>Class       : com.dataport.booking.controller.LoginController
+ * <p>Descdription: user状态为0为管理员登录，状态为1为员工登录，状态为2为账号或者密码错误
+ *
+ * @author  XX XX@dataport.com.cn
+ * @version 1.0.0
+ *<p>
+ *--------------------------------------------------------------<br>
+ * 修改履历：<br>
+ *        <li> 2019年7月23日，XX@dataport.com.cn，创建文件；<br>
+ *--------------------------------------------------------------<br>
+ *</p>
+ */
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -29,16 +42,19 @@ public class LoginController {
 	
 	@PostMapping("/doLogin")
 	public String doLogin(@RequestParam String userAccount,@RequestParam String password) {
-		System.out.println("测试zjw");
+		//System.out.println("测试zjw");
 		User user = userService.findByAccount(userAccount);
 		if (user!=null) {
 			if (user.getPassword().equals(password)) {
-				return "success";
+				if(user.getState()==0) {
+					return "0";
+				}else
+					return "1";
 			}else {
-				return "fail";
+				return "2";
 			}
 		}
-		return "fail";
+		return "2";
 	}
 
 }

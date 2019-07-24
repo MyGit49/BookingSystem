@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
+	@Column(name = "user_id")
 	private int userId;
 	
 	@Column(name = "user_account")
@@ -28,7 +29,7 @@ public class User {
 	private String phone;
 	
 	@Column(name = "user_state")
-	private String state;
+	private int state;
 
 	public int getId() {
 		return userId;
@@ -86,11 +87,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	
