@@ -45,4 +45,11 @@ public class MeetingService {
 	public List<Meeting> findAll(){
 		return meetingRepositoryIF.findAll();
 	}
+	
+	
+	public int insertMeeting(Meeting meeting) {
+		  return meetingRepositoryIF.insertMeeting(meeting.getMeetingId(),meeting.getUserId(),
+		    meeting.getRoomId(),meeting.getContent(),meeting.getStartTime(),meeting.getEndTime(),
+		    meeting.getDate());
+		 }
 }

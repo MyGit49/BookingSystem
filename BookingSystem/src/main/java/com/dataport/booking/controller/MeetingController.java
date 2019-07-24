@@ -86,8 +86,13 @@ public class MeetingController {
 	@PostMapping("/addMeeting")
 	public String addMeeting(@RequestBody Meeting meeting){
 		//需要实现的业务逻辑
-		String string = new String();
-		return string;
+		int size=meetingService.insertMeeting(meeting);
+		String string;
+		  if(size>0) {
+		   string = new String("success");}
+		  else {
+		   string = new String("false");}
+		  return string;
 	}
 	
 	/**
