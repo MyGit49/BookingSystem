@@ -127,5 +127,28 @@ public class MeetingController {
 //		}
 //		return null;
 //	}
+	/**
+	 * @author zhangjw
+	 * 实现：杨雷
+	 *删除会议记录
+	 *入参：userId,meetingId
+	 */
+	@PostMapping("/deleteMeeting")
+	public String deleteMeeting(@RequestParam int meetingId,@RequestParam int userId) {
+		//int meetid=Integer.parseInt(meetingId);
+		if(userId==meetingService.selectUserIdFromMeeting(meetingId)) {
+			Integer size=meetingService.deleteMeeting(meetingId);
+			String string;
+			if(size>0) {
+				string = new String("success");
+			}
+			else {
+				string = new String("false");
+			}
+			return string;
+		}
+		else
+			return "userId false";
+	}
 	
 }

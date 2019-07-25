@@ -64,6 +64,22 @@ public class MeetingService {
 
 		meetingRepositoryIF.save(meeting);
 	}
+
+    /**
+     * 删除会议记录
+     */
+    public int deleteMeeting(Integer meetingId) {
+        return meetingRepositoryIF.deleteMeeting(meetingId);
+    }
+
+    /**
+     * 查询Meeting中的userId
+     */
+
+    public int selectUserIdFromMeeting(int meetingId) {
+        Meeting meet1=meetingRepositoryIF.findByMeetingId(meetingId);
+        return meet1.getUserId();
+    }
 	
 	/**
 	 * @author heyh
