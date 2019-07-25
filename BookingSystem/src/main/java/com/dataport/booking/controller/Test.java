@@ -78,7 +78,9 @@ public class Test {
                 endTime = (meetingList.get(i).getEndTime()-1)/2+":30";
             }
             Room room = roomService.findByRoomId(meetingList.get(i).getRoomId());
-            mailText = "会议时间："+startTime+"--"+endTime+","+"会议地点："+room.getName()+","+"会议内容："+meetingList.get(i).getContent()+"。";
+            mailText = "会议时间："+startTime+"--"+endTime+"\n"
+                    +"会议地点："+room.getName()+"\n"
+                    +"会议内容："+meetingList.get(i).getContent()+"。";
             mailService.postMail(user.getEmail(),"会议通知",mailText);
         }
         System.out.println(meetingList.size()+todayString+hour);
