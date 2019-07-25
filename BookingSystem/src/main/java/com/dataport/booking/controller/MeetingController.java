@@ -74,6 +74,11 @@ public class MeetingController {
 		return meetingService.meetingByDay(date);
 	}
 	
+	@PostMapping("/meetingByUserId")
+	public List<Meeting> meetingByUserId(@RequestParam int userId){
+		return meetingService.meetingByUserId(userId);
+	}
+	
 	/**
 	 * @author zhangjw
 	 * 实现：宋家林
