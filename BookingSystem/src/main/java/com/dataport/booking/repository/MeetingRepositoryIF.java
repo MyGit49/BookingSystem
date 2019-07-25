@@ -31,6 +31,8 @@ public interface MeetingRepositoryIF extends JpaRepository<Meeting, String>{
 	List<Meeting> findByDateAndRoomId(Date date,Integer roomId);
 	List<Meeting> findAll();
 	List<Meeting> findByRoomId(int roomId);
+	Meeting findByMeetingId(int meetingId);
+	Meeting findByUserId(int userId);
 	@Modifying
 	@Query(value="insert into table_meeting(meeting_id,user_id,room_id,meeting_content,start_time,end_time,date) values(?1,?2,?3,?4,?5,?6,?7)",nativeQuery = true)
 	 int insertMeeting(Integer tableMeeting,Integer userId,Integer roomId,String meetingContent,Integer startTime,Integer endTime,String date );

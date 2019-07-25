@@ -52,7 +52,17 @@ public class MeetingService {
 		    meeting.getRoomId(),meeting.getContent(),meeting.getStartTime(),meeting.getEndTime(),
 		    meeting.getDate());
 		 }
-	
+	public Meeting editMeeting(int meetingId,int userId) {
+		Meeting meeting=meetingRepositoryIF.findByMeetingId(meetingId);
+		if(userId==meeting.getMeetingId()) {
+			return meeting;
+		}
+		return null;
+	}
+	public void updateMeeting(Meeting meeting) {
+
+		meetingRepositoryIF.save(meeting);
+	}
 	
 	/**
 	 * @author heyh

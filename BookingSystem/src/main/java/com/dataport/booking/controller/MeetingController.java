@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,11 +98,29 @@ public class MeetingController {
 	 *入参：userId,meetingId
 	 */
 	@PostMapping("/editMeeting")
-	public String editMeeting(@RequestParam String userId,
-			@RequestParam String meetingId){
-		//需要实现的业务逻辑
-		String string = new String();
-		return string;
+	public Meeting editMeeting(@RequestParam int userId,
+			@RequestParam int meetingId){
+		//根据userId以及meetingId找到要修改的信息
+		return meetingService.editMeeting(meetingId, userId);
+	}
+	@PutMapping("/updateMeeting")
+	public Meeting updateMeeting(@RequestBody Meeting meeting){
+		
+		if(meetingService.editMeeting(meeting.getMeetingId(), meeting.getUserId())!=null) {
+			String content=meeting.getContent();
+			int roomId=meeting.getRoomId();
+			int startTime=meeting.getStartTime();
+			int endTime=meeting.getEndTime();
+			String date=meeting.getDate();
+			meeting.setContent(content);
+			meeting.setRoomId(roomId);
+			meeting.setStartTime(startTime);
+			meeting.setEndTime(endTime);
+			meeting.setDate(date);
+			meetingService.updateMeeting(meeting);
+			return meeting;
+		}
+		return null;
 	}
 	
 }
