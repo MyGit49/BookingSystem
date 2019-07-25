@@ -7,4 +7,5 @@ import com.dataport.booking.entity.User;
 public interface UserRepositoryIF extends JpaRepository<User, String>{
 	User findByAccount(String string);
 	User findByUserId(int userId);
+	User findByUserId(String userId);
 }

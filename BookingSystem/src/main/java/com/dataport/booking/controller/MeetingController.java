@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.dataport.booking.entity.MyMeeting;
+import com.dataport.booking.entity.OneMeeting;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +60,7 @@ public class MeetingController {
 	 *入参：房间ID、月份（1-12）    按需要将参数转为int类型
 	 */
 	@PostMapping("/meetingByMonth")
-	public List<Meeting> meetingByMonth(@RequestParam String roomId,
+	public List<OneMeeting> meetingByMonth(@RequestParam String roomId,
 			@RequestParam String date){
 		return meetingService.meetingByMonth(roomId,date);
 	}
@@ -74,11 +76,14 @@ public class MeetingController {
 		return meetingService.meetingByDay(date);
 	}
 	
+//	@PostMapping("/meetingByUserId")
+//	public List<Meeting> meetingByUserId(@RequestParam int userId){
+//		return meetingService.meetingByUserId(userId);
+//	}
 	@PostMapping("/meetingByUserId")
-	public List<Meeting> meetingByUserId(@RequestParam int userId){
+	public List<OneMeeting> meetingByUserId(@RequestParam int userId){
 		return meetingService.meetingByUserId(userId);
 	}
-	
 	/**
 	 * @author zhangjw
 	 * 实现：宋家林

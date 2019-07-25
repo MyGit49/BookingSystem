@@ -6,6 +6,7 @@
 package com.dataport.booking.service;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dataport.booking.entity.Meeting;
+import com.dataport.booking.entity.OneMeeting;
+import com.dataport.booking.entity.Room;
+import com.dataport.booking.entity.User;
 import com.dataport.booking.repository.MeetingRepositoryIF;
+import com.dataport.booking.repository.RoomRepositoryIF;
+import com.dataport.booking.repository.UserRepositoryIF;
 
 /**
  * <p>Class       : com.dataport.booking.service.MeetingService
@@ -35,7 +41,10 @@ import com.dataport.booking.repository.MeetingRepositoryIF;
 public class MeetingService {
 	@Autowired 
 	MeetingRepositoryIF meetingRepositoryIF;
-	
+	@Autowired
+	UserRepositoryIF userRepositoryIF;
+	@Autowired
+	RoomRepositoryIF roomRepositoryIF;
 //	public List<Meeting> findByDate(Timestamp date,int roomId) {
 //		return meetingRepositoryIF.findByDateAndRoomId(date, roomId);
 //	}
@@ -100,18 +109,43 @@ public class MeetingService {
 	 *  
 	 *  2  按月份输出Meeting记录
 	 */
-	public List<Meeting> meetingByMonth(String roomId,String date){
-		int roomId1=Integer.parseInt(roomId);
-		List<Meeting> list = meetingRepositoryIF.findByRoomId(roomId1);
-		for(int i=list.size()-1;i>=0;i--) {
-			String str = list.get(i).getDate();
-			if(!(date.substring(0,4).equals(str.substring(0, 4))&&date.substring(5, 7).equals(str.substring(5, 7)))) {
-				list.remove(list.get(i));
-			}
-		}
-		return list;
-	}
-	
+//	public List<Meeting> meetingByMonth(String roomId,String date){
+//		int roomId1=Integer.parseInt(roomId);
+//		List<Meeting> list = meetingRepositoryIF.findByRoomId(roomId1);
+//		for(int i=list.size()-1;i>=0;i--) {
+//			String str = list.get(i).getDate();
+//			if(!(date.substring(0,4).equals(str.substring(0, 4))&&date.substring(5, 7).equals(str.substring(5, 7)))) {
+//				list.remove(list.get(i));
+//			}
+//		}
+//		return list;
+//	}
+    public List<OneMeeting> meetingByMonth(String roomId,String date){
+    	  int roomId1=Integer.parseInt(roomId);
+    	  List<OneMeeting> oneMeetings=new ArrayList<>();
+    	  List<Meeting> meetings = meetingRepositoryIF.findByRoomId(roomId1);
+    	  System.out.println(meetings.size());
+    	  Room room=roomRepositoryIF.findByRoomId(roomId1);
+    	  for(int i=meetings.size()-1;i>=0;i--) {
+    	   OneMeeting oneMeeting=new OneMeeting();
+    	   User user=userRepositoryIF.findByUserId(meetings.get(i).getUserId());
+    	   System.out.println(user.getName());
+    	   String str = meetings.get(i).getDate();
+    	   if(!(date.substring(0,4).equals(str.substring(0, 4))&&date.substring(5, 7).equals(str.substring(5, 7)))) {
+    	    meetings.remove(meetings.get(i));
+    	    
+    	   }else {
+    	    oneMeeting.setRoomName(room.getName());
+    	    oneMeeting.setUserName(user.getName());
+    	    oneMeeting.setMeeting(meetings.get(i));
+    	    oneMeetings.add(oneMeeting);
+    	   }
+    	   
+    	  }
+    	  return oneMeetings;
+    	 }
+    
+    
 	public List<Meeting> meetingByDay(String date){
 		List<Meeting> list = meetingRepositoryIF.findAll();
 		for(int i=list.size()-1;i>=0;i--) {
@@ -140,10 +174,24 @@ public class MeetingService {
 //		return list;
 //	}
 
-	public List<Meeting> meetingByUserId(int userId){
-		List<Meeting> list = meetingRepositoryIF.findByUserId(userId);
-		return list;
+//	public List<Meeting> meetingByUserId(int userId){
+//		List<Meeting> list = meetingRepositoryIF.findByUserId(userId);
+//		return list;
+//	}
+	public List<OneMeeting> meetingByUserId(int userId){
+		List<OneMeeting> oneMeetings=new ArrayList<>();
+		User user=userRepositoryIF.findByUserId(userId);	
+		List<Meeting> meetings = meetingRepositoryIF.findByUserId(userId);
+		System.out.println(meetings.size());
+		for(int i=meetings.size()-1;i>=0;i--) {
+			OneMeeting oneMeeting=new OneMeeting();
+			Room room=roomRepositoryIF.findByRoomId(meetings.get(i).getRoomId());
+			oneMeeting.setRoomName(room.getName());
+			oneMeeting.setUserName(user.getName());
+			oneMeeting.setMeeting(meetings.get(i));
+			oneMeetings.add(oneMeeting);		
+		}	
+		return oneMeetings;
 	}
-
 	
 }
