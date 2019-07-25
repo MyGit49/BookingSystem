@@ -11,7 +11,7 @@ public class Room {
 	
 	@Id
 	@Column(name = "room_id")
-	private int room_id;
+	private int roomId;
 	
 	@Column(name = "room_name")
 	private String name;
@@ -22,12 +22,12 @@ public class Room {
 	@Column(name = "room_state")
 	private int state;
 
-	public int getRoom_id() {
-		return room_id;
+	public int getRoomId() {
+		return roomId;
 	}
 
-	public void setRoom_id(int room_id) {
-		this.room_id = room_id;
+	public void setRoomId(int room_id) {
+		this.roomId = room_id;
 	}
 
 	public String getName() {

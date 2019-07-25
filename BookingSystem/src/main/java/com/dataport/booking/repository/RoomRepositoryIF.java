@@ -6,4 +6,6 @@ import com.dataport.booking.entity.Room;
 
 public interface RoomRepositoryIF extends JpaRepository<Room, String>{
 
+    Room findByRoomId(int id);
+
 }
