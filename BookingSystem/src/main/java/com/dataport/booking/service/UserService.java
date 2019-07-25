@@ -27,6 +27,10 @@ public class UserService {
 	public User findByAccount(String string) {
 		return userRepositoryIF.findByAccount(string);	
 	}
+
+	public User findByUserId(int userId){
+		return userRepositoryIF.findByUserId(userId);
+	}
 	
 	
 }

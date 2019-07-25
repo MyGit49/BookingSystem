@@ -40,7 +40,7 @@ public class MeetingService {
 //		return meetingRepositoryIF.findByDateAndRoomId(date, roomId);
 //	}
 //	
-	public List<Meeting> findByInfromation(Date date,Integer roomId) {
+	public List<Meeting> findByInfromation(String date,Integer roomId) {
 		return meetingRepositoryIF.findByDateAndRoomId(date, roomId);
 	}
 	public List<Meeting> findAll(){
@@ -49,7 +49,19 @@ public class MeetingService {
 	
 	
 	public int insertMeeting(Meeting meeting) {
-		  return meetingRepositoryIF.insertMeeting(meeting.getMeetingId(),meeting.getUserId(),
+		List<Meeting> listMeeting=meetingRepositoryIF.findByDateAndRoomId(meeting.getDate(), meeting.getRoomId());
+		//Iterator it = listMeeting.iterator();
+		//Meeting m1=new Meeting();
+		for(Meeting m1:listMeeting) {
+			if(meeting.getStartTime()>m1.getStartTime()&&meeting.getStartTime()<m1.getEndTime())
+				return 0;
+			if(meeting.getEndTime()>m1.getStartTime()&&meeting.getEndTime()<m1.getEndTime())
+				return 0;
+			if(meeting.getStartTime()<=m1.getStartTime()&&meeting.getEndTime()>=m1.getEndTime())
+				return 0;
+		}
+
+		return meetingRepositoryIF.insertMeeting(meeting.getMeetingId(),meeting.getUserId(),
 		    meeting.getRoomId(),meeting.getContent(),meeting.getStartTime(),meeting.getEndTime(),
 		    meeting.getDate());
 		 }
@@ -113,20 +125,20 @@ public class MeetingService {
 		return list;
 	}
 
-	public List<Meeting> meetingByTime(String time){
-		List<Meeting> list = meetingRepositoryIF.findAll();
-		Calendar c = Calendar.getInstance();
-		int hour = c.get(Calendar.HOUR_OF_DAY);
-		for(int i=list.size()-1;i>=0;i--) {
-			String str = list.get(i).getDate();
-			if(!(time.equals(str))&&(list.get(i).getStartTime()-hour*2)>4) {
-				list.remove(list.get(i));
-			}
-		}
-
-
-		return list;
-	}
+//	public List<Meeting> meetingByTime(String time){
+//		List<Meeting> list = meetingRepositoryIF.findAll();
+//		Calendar c = Calendar.getInstance();
+//		int hour = c.get(Calendar.HOUR_OF_DAY);
+//		for(int i=list.size()-1;i>=0;i--) {
+//			String str = list.get(i).getDate();
+//			if(!(time.equals(str))&&(list.get(i).getStartTime()-hour*2)>4) {
+//				list.remove(list.get(i));
+//			}
+//		}
+//
+//
+//		return list;
+//	}
 
 	public List<Meeting> meetingByUserId(int userId){
 		List<Meeting> list = meetingRepositoryIF.findByUserId(userId);

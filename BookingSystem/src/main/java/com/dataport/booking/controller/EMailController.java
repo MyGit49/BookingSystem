@@ -30,14 +30,10 @@ public class EMailController {
 
     @PostMapping("/postMail")
     public String postMail(@RequestParam String mailSubject,@RequestParam String mailText,
-                           @RequestParam String meetingId){
+                           @RequestParam String mailAddress){
         System.out.println(".........");
-        int Id = Integer.parseInt(meetingId);
-        List<Particpants> particpantsList = particpantsService.findByMeetingId(Id);
         try{
-            for (Particpants particpants : particpantsList){
-                mailService.postMail(particpants.getUserEmail(),mailSubject,mailText);
-            }
+            mailService.postMail(mailAddress,mailSubject,mailText);
             return "success";
         }catch(Exception e){
             return "error";

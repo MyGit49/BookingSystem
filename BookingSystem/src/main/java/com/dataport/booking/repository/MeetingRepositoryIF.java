@@ -28,7 +28,7 @@ import com.dataport.booking.entity.Meeting;
  *</p>
  */
 public interface MeetingRepositoryIF extends JpaRepository<Meeting, String>{
-	List<Meeting> findByDateAndRoomId(Date date,Integer roomId);
+	List<Meeting> findByDateAndRoomId(String date,Integer roomId);
 	List<Meeting> findAll();
 	List<Meeting> findByRoomId(int roomId);
 	Meeting findByMeetingId(int meetingId);
