@@ -6,6 +6,7 @@
 package com.dataport.booking.service;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -95,11 +96,26 @@ public class MeetingService {
 		
 		return list;
 	}
+
+	public List<Meeting> meetingByTime(String time){
+		List<Meeting> list = meetingRepositoryIF.findAll();
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		for(int i=list.size()-1;i>=0;i--) {
+			String str = list.get(i).getDate();
+			if(!(time.equals(str))&&(list.get(i).getStartTime()-hour*2)>4) {
+				list.remove(list.get(i));
+			}
+		}
+
+
+		return list;
+	}
+
 	public List<Meeting> meetingByUserId(int userId){
 		List<Meeting> list = meetingRepositoryIF.findByUserId(userId);
 		return list;
 	}
-	
-	
+
 	
 }

@@ -32,7 +32,8 @@ public class TimeTask {
     @Autowired
     RoomService roomService;
     //定时任务条件
-    @Scheduled(cron = "0/2 * * * * ?")
+    //每年：0 0 0 0 0 ? *
+    @Scheduled(cron = "0 0 * * * ?")
     public void doTask(){
         Date nowTime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd");
