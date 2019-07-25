@@ -95,7 +95,10 @@ public class MeetingService {
 		
 		return list;
 	}
-	
+	public List<Meeting> meetingByUserId(int userId){
+		List<Meeting> list = meetingRepositoryIF.findByUserId(userId);
+		return list;
+	}
 	
 	
 	
