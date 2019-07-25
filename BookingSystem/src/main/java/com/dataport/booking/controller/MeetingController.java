@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.dataport.booking.entity.MyMeeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -98,29 +99,28 @@ public class MeetingController {
 	 *入参：userId,meetingId
 	 */
 	@PostMapping("/editMeeting")
-	public Meeting editMeeting(@RequestParam int userId,
-			@RequestParam int meetingId){
-		//根据userId以及meetingId找到要修改的信息
-		return meetingService.editMeeting(meetingId, userId);
+	public String editMeeting(@RequestBody MyMeeting myMeeting){
+		//返回前台状态码success或者error。
+		return "";
 	}
-	@PutMapping("/updateMeeting")
-	public Meeting updateMeeting(@RequestBody Meeting meeting){
-		
-		if(meetingService.editMeeting(meeting.getMeetingId(), meeting.getUserId())!=null) {
-			String content=meeting.getContent();
-			int roomId=meeting.getRoomId();
-			int startTime=meeting.getStartTime();
-			int endTime=meeting.getEndTime();
-			String date=meeting.getDate();
-			meeting.setContent(content);
-			meeting.setRoomId(roomId);
-			meeting.setStartTime(startTime);
-			meeting.setEndTime(endTime);
-			meeting.setDate(date);
-			meetingService.updateMeeting(meeting);
-			return meeting;
-		}
-		return null;
-	}
+//	@PutMapping("/updateMeeting")
+//	public Meeting updateMeeting(@RequestBody Meeting meeting){
+//
+//		if(meetingService.editMeeting(meeting.getMeetingId(), meeting.getUserId())!=null) {
+//			String content=meeting.getContent();
+//			int roomId=meeting.getRoomId();
+//			int startTime=meeting.getStartTime();
+//			int endTime=meeting.getEndTime();
+//			String date=meeting.getDate();
+//			meeting.setContent(content);
+//			meeting.setRoomId(roomId);
+//			meeting.setStartTime(startTime);
+//			meeting.setEndTime(endTime);
+//			meeting.setDate(date);
+//			meetingService.updateMeeting(meeting);
+//			return meeting;
+//		}
+//		return null;
+//	}
 	
 }
